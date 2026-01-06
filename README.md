@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="LumiLexia Disleksi Gelişim Takip ve Eğitim Platformu.jpg" alt="LumiLexia İnfografik" width="100%">
+</div>
+
+---
+
 # LumiLexia: Disleksi Gelişim Takip ve Eğitim Platformu
 
 **Ders:** BOZ213 Nesne Yönelimli Programlama (OOP)  
