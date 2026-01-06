@@ -1,33 +1,57 @@
-LumiLexia: Disleksi Gelişim Takip Platformu
+# LumiLexia: Disleksi Gelişim Takip ve Eğitim Platformu
 
-LumiLexia, disleksili çocukların okuma akıcılığını ve fonolojik farkındalıklarını artırmak amacıyla geliştirilmiş, oyunlaştırma tabanlı bir eğitsel oyun motorudur. Proje, öğrenme sürecini bir uzay görevine dönüştürerek disleksiyle ilişkilendirilen stres ve kaygıyı minimize etmeyi hedefler.
+**Ders:** BOZ213 Nesne Yönelimli Programlama (OOP)  
+**Proje Türü:** Final Projesi  
+**Geliştirici:** Eda Kibar  
+**Durum:** Tamamlandı (v1.0)
 
-Proje Amacı ve Vizyonu
+## Proje Vizyonu
 
-Temel hedef, oyunlaştırılmış bir ortamda görsel dikkat ve fonetik işleme süreçlerini takip etmektir. Uygulama, kullanıcının farklı bilişsel görevlerdeki tepki sürelerini ve doğruluk oranlarını hassas bir şekilde ölçer. Elde edilen veriler sadece kaydedilmekle kalmaz, aynı zamanda veliler ve eğitimciler için anlamlı içgörülere dönüştürülür. Bu sayede oyun ile klinik gözlem arasında dijital bir köprü kurulur.
+LumiLexia, disleksili çocukların okuma akıcılığını ve görsel dikkatlerini artırmak amacıyla tasarlanmış, uzay temalı bir eğitsel oyun motorudur. Projenin kalbinde, dış kaynaklı kütüphanelere bağımlı kalmadan geliştirilmiş **özgün DyslexiFlow kütüphanesi** yer almaktadır.
 
-Öne Çıkan Özellikler
+## Yazılım Mimarisi ve OOP Prensipleri
 
-DyslexiFlow Kütüphanesi: Bu proje için özel olarak geliştirilen bir motordur. Kelimeleri dinamik olarak hecelerine ayırır ve metne dalgalanma efekti verir. Bu sayede disleksili bireylerin sıkça yaşadığı görsel kalabalık (visual crowding) etkisini azaltarak okumayı kolaylaştırır.
+Proje, akademik seviyede bir mimariyle, Nesne Yönelimli Programlamanın (OOP) temel direkleri üzerine inşa edilmiştir:
 
-İşitsel Geri Bildirim: Kullanıcı hecelere tıkladığında veya heceleri birleştirdiğinde, sistem ilgili ses birimlerini seslendirerek fonolojik farkındalığı destekler.
+* **İleri Seviye Kalıtım (Inheritance):** Uygulama, `BaseModule` adında soyut bir temel sınıftan türetilmiştir. Radar, Sinyal ve Terminal gibi tüm alt modüller bu sınıftan kalıtım alarak kod tekrarını önler ve merkezi bir yönetim sağlar.
+* **Dinamik Çok Biçimlilik (Polymorphism):** Her modül, ana motordan gelen `draw()` ve `handle_event()` komutlarını kendi özel mantığına göre **override** eder.
+* **Kapsülleme (Encapsulation) ve Güvenlik:** `DyslexiFlow` motorunun iç mantığı ve kullanıcı verileri sınıflar içinde kapsüllenmiştir. Verilere doğrudan müdahale engellenmiştir.
+* **Modüler Tasarım:** Raporlama, AI asistan bağlantısı ve profil yönetimi gibi her sorumluluk ayrı bir sınıfa (Single Responsibility) atanarak sürdürülebilir bir yapı kurulmuştur.
 
-AI İşbirliği ve Pair Programming: Proje geliştirme süreci, yapay zeka asistanı ile interaktif bir şekilde yürütülmüştür. Gemini API entegrasyonu sayesinde kullanıcı hataları analiz edilir ve Lumina karakteri üzerinden rehberlik sağlanır.
+## Teknik Özellikler ve Bileşenler
 
-Otomatik Raporlama: Oturum sonunda Radar, Sinyal ve Terminal modüllerinden gelen performans verileri işlenir. Bu veriler profesyonel bir HTML raporuna dönüştürülerek velinin e-posta adresine otomatik olarak iletilir.
+| Bileşen | Teknik Karşılığı | Fonksiyonu |
+| :--- | :--- | :--- |
+| **DyslexiFlow** | **Özgün Motor** | **Metinlerin hecelenmesi, hecelerin disleksiye uygun renk paletiyle renklendirilmesi ve "Visual Crowding" önleyici dalgalanma efekti.** |
+| **Phonetic Audio** | **Threaded Sound** | **Hecelerle etkileşime girildiğinde fonolojik farkındalık için anlık seslendirme.** |
+| **Automated Report** | **SMTP Integration** | **Performans verilerinin HTML formatında veli e-posta adresine iletilmesi.** |
+| **Lumina Assistant** | **API Collaboration** | **Kullanıcı süreçlerinin AI altyapısıyla (Gemini) teorik analiz hazırlığı.** |
 
-Teknik Mimari (OOP)
+## Kurulum ve Çalıştırma
 
-Yazılımın temeli Nesne Yönelimli Programlama (OOP) prensiplerine dayanmaktadır. BaseModule sınıfı kullanılarak Inheritance ve Polymorphism ilkeleri etkin bir şekilde uygulanmıştır. Her oyun modülü temel özellikleri bu sınıftan devralırken, kendi özgün mantığını aşağıdaki görevler üzerinden yürütür:
+Uygulamayı yerel ortamınızda ayağa kaldırmak için aşağıdaki adımları izleyebilirsiniz:
 
-Radar: Yanlış yazılmış kelimeleri tespit ederek görsel ayırt etme yeteneğini geliştirir.
+1. **Depoyu Klonlayın:**
 
-Sinyal: Mıknatıs mekanizmasıyla heceleri birleştirerek fonetik bağ kurmayı güçlendirir.
+```bash
+git clone https://github.com/edakibaar/LumiLexia.git
+```
 
-Terminal: Hızlı isimlendirme ve nesne-kelime eşleştirmesini destekler.
+2. **Gereksinimleri Yükleyin:**
+```bash
+pip install pygame google-generativeai python-dotenv
+```
+3. **Uygulamayı Başlatın:**
+```bash
+python main__.py
+``` 
 
-Kurulum ve Gereksinimler
+## Gelecek Vizyonu (Roadmap)
+Sürekli gelişim ilkemiz doğrultusunda v2.0 sürümü için planlanan AR-GE çalışmaları:
 
-Uygulamayı çalıştırmak için aşağıdaki kütüphanelerin yüklü olması gerekmektedir: pip install pygame google-generativeai python-dotenv
+Pedagojik AI Rehberliği: Hatalı işlemlerde yapay zekanın sesli ve anlık pedagojik ipuçları vermesi.
 
-Önemli Not: Projenin çalışması için gerekli olan Gemini API key ve e-posta gönderimi için kullanılan App Password bilgileri, geliştirme sürecindeki teknik zorunluluklar nedeniyle doğrudan ilgili kod blokları içerisinde tanımlanmıştır. .env dosyasının konfigürasyon aşamasında yaşanabilecek olası erişim hatalarını önlemek adına bu yöntem tercih edilmiştir. Kurulumdan sonra main__.py dosyasını çalıştırarak uzay görevine başlayabilirsiniz.
+Kişiselleştirilmiş Müfredat: Algoritmalarımızın, çocuğun disleksi türüne göre zorluk seviyesini dinamik olarak ayarlaması.
+
+## Lisans
+Bu proje eğitim amaçlı geliştirilmiştir. Tüm hakları saklıdır.
